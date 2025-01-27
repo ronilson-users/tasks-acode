@@ -1,37 +1,37 @@
 # Task Manager Acode
 
-Este é um plugin para gerenciar tarefas e subtarefas com uma interface intuitiva e funcionalidades avançadas. O plugin permite criar, editar, excluir e organizar tarefas, além de adicionar subtarefas com anotações e progressos. 
+This is a plugin designed to manage tasks and subtasks with an intuitive interface and advanced functionalities. The plugin allows you to create, edit, delete, and organize tasks, as well as add subtasks with notes and progress tracking.
 
-## Funcionalidades
+## Features
 
-### **1. Gerenciamento de Tarefas**
-- Criar novas tarefas.
-- Deletar tarefas existentes.
-- Exibir progresso com base nas subtarefas concluídas.
-- Alterar o estado de conclusão das subtarefas.
+### **1. Task Management**
+- Create new tasks.
+- Delete existing tasks.
+- Display progress based on completed subtasks.
+- Change the completion status of subtasks.
 
-### **2. Subtarefas**
-- Adicionar subtarefas relacionadas às tarefas principais.
-- Marcar subtarefas como concluídas.
-- Excluir subtarefas.
-- Gerenciar notas para subtarefas.
+### **2. Subtasks**
+- Add subtasks related to main tasks.
+- Mark subtasks as completed.
+- Delete subtasks.
+- Manage notes for subtasks.
 
-### **3. Anotações em Subtarefas**
-- Adicionar notas personalizadas para cada subtarefa.
-- Salvar e editar o conteúdo das notas.
-- Gerar checkboxes automaticamente a partir de textos no formato. exemplo: `# TEXTO.` 
+### **3. Subtask Notes**
+- Add custom notes for each subtask.
+- Save and edit note content.
+- Automatically generate checkboxes from text in the format. Example: `# TEXT.`
 
-### **4. Notificações e Indicadores**
-- Exibição de ícones indicando tarefas e subtarefas concluídas.
-- Destaque visual para subtarefas com anotações.
+### **4. Notifications and Indicators**
+- Display icons indicating completed tasks and subtasks.
+- Visual highlight for subtasks with notes.
 
+### **5. Data Persistence**
+- Tasks are stored in `localStorage` so you don't lose data when reloading the page.
 
-### **5. Persistência de Dados**
-- As tarefas são armazenadas no `localStorage` para que você não perca os dados ao recarregar a página.
+## Technologies Used
+- **React**: Main framework for the interface.
+- **React Icons**: Icons to enhance the user's visual experience.
+- **localStorage**: Data persistence in the browser.
 
-## Tecnologias Utilizadas
-- **React**: Estrutura principal da interface.
-- **React Icons**: Ícones para melhorar a experiência visual do usuário.
-- **localStorage**: Persistência de dados no navegador.
-
-## Como Usar
+## How to Use
+Press `Ctrl+Shift+R` 
