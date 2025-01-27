@@ -1,5 +1,5 @@
 {
-  "name": "acode-plugin-tasks",
+  "name": "acode-plugin-task-manager",
   "version": "1.0.2",
   "description": "Template for Acode plugin",
   "main": "dist/main.js",
@@ -7,7 +7,6 @@
   "author": "Ajit <me@ajitkumar.dev>",
   "license": "MIT",
   "dependencies": {
-    
     "html-tag-js": "^1.1.41",
     "jsongraph-react": "^0.0.12",
     "react": "^18.3.1",

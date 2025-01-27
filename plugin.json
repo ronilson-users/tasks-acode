@@ -1,6 +1,6 @@
 {
-  "id": "rsjronilson.acode.Tasks",
-  "name": "Plugin Acode Tasks",
+  "id": "rsjronilson.task.manager",
+  "name": "Task Manager Acode",
   "main": "dist/main.js",
   "version": "1.0.0",
   "readme": "readme.md",
@@ -11,6 +11,6 @@
   "author": {
     "name": "ronilson.users",
     "email": "ronilson.stos@gmail.com",
-    "github": ""
+    "github": "https://github.com/ronilson-users/tasks-acode.git"
   }
 }

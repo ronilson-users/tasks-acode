@@ -2,7 +2,7 @@ import plugin from "../plugin.json";
 import React from "react";
 import ReactDOM from "react-dom/client"; // import createRoot from ReactDOM
 import ErrorBoundary from "./ErrorBoundary"; // Import the error boundary
- 
+
 import App from "./App";
 
 import { modalStyles } from "./style.js";  // Importando os estilos
@@ -16,17 +16,16 @@ class AcodePlugin {
 
   // Crie um container para o modal
   let modalOverlay = document.createElement("div");
-  
+
   modalOverlay.id = "modal-overlay";
   modalOverlay.style.cssText = modalStyles.overlay;  // Aplicando estilo
 
   let modalContainer = document.createElement("div");
-  
+
   modalContainer.id = "modal-container";
   modalContainer.style.cssText = modalStyles.container;  // Aplicando estilo
 
   modalOverlay.appendChild(modalContainer);
-
 
   document.body.appendChild(modalOverlay);
 
@@ -36,12 +35,12 @@ class AcodePlugin {
 
   root.render(
    <ErrorBoundary>
- <App
- 
+    <App
+
      baseUrl={this.baseUrl}
      cacheFile={cacheFile}
      cacheFileUrl={cacheFileUrl} />
-      
+
    </ErrorBoundary>
   );
 
@@ -52,7 +51,7 @@ class AcodePlugin {
    name: "react-acode",
    description: "react acode interface",
    bindKey: {
-    win: "Ctrl-Shift-r",
+    win: "Ctrl-Shift-t",
    },
    exec: () => this.showModal(),
   });

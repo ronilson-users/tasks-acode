@@ -30,6 +30,8 @@ const buttonStyle = {
  transition: "background-color 0.3s, opacity 0.3s",
 };
 
+
+
 const textInputStyle = {
  flex: 1,
  padding: "8px",
@@ -51,7 +53,7 @@ const progressBarStyle = {
 const progressStyle = (percentage) => ({
  height: "100%",
  width: `${percentage}%`,
- backgroundColor: percentage === 100 ? "#5bddf5" : "#3b82f6",
+ backgroundColor: percentage === 100 ? "#07ABFF" : "#3b82f6",
  transition: "width 0.3s",
 });
 
@@ -159,7 +161,7 @@ const TaskItem = ({ task, taskIndex, setTasks, deleteTask }) => {
   const matches = [...subtaskNote.matchAll(regex)].map(match => match[1]);
 
   if (matches.length === 0) {
-   alert("Nenhum texto no formato '# TEXTO.' foi encontrado.");
+   alert("Nenhum texto no formato n/ '# TEXTO.' foi encontrado.");
    return;
   }
 
@@ -180,7 +182,7 @@ const TaskItem = ({ task, taskIndex, setTasks, deleteTask }) => {
     backgroundColor: 'rgba(0, 0, 0, 0.1)',
     color: "#fff",
     borderRadius: "2px",
-    border: allCompleted ? "1px solid #5bddf5" : "1px solid #06f471d5",
+    border: allCompleted ? "1px solid #5bddf5" : "1px solid #07ABFF",
    }}>
 
    {/*container da task*/}
