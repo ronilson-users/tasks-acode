@@ -35,3 +35,7 @@ This is a plugin designed to manage tasks and subtasks with an intuitive interfa
 
 ## How to Use
 Press `Ctrl+Shift+R` 
+
+## version
+
+## v1.0.2 . BUG FIXED
