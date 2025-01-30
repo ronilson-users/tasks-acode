@@ -1,0 +1,170 @@
+
+### JavaScript
+
+1. **Fundamentos de JavaScript**
+   - Sintaxe básica (variáveis, tipos de dados, operadores)
+   
+   - Estruturas de controle (if/else, switch, loops)
+   
+   - Funções (declaração, expressões, arrow functions)
+   
+   - Escopo e closures
+
+2. **Manipulação do DOM**
+   - Seleção de elementos (getElementById, querySelector)
+   - Manipulação de eventos (addEventListener)
+   - Modificação de conteúdo e estilos
+
+3. **ES6+ (Modern JavaScript)**
+   - Let e const
+   - Template literals
+   - Destructuring
+   - Spread e rest operators
+   - Promises e async/await
+   - Módulos (import/export)
+
+4. **Frameworks e Bibliotecas**
+   - React.js
+   - Vue.js
+   - Angular
+   - Svelte
+
+5. **Ferramentas de Build**
+   - Webpack
+   - Babel
+   - Vite
+
+6. **Testes**
+   - Jest
+   - Mocha e Chai
+   - Cypress (testes end-to-end)
+
+7. **APIs e AJAX**
+   - Fetch API
+   - Axios
+   - JSON (manipulação e consumo)
+
+8. **Segurança**
+   - XSS (Cross-Site Scripting)
+   - CSRF (Cross-Site Request Forgery)
+   - CORS (Cross-Origin Resource Sharing)
+
+---
+
+### Python
+1. **Fundamentos de Python**
+   - Sintaxe básica (variáveis, tipos de dados, operadores)
+   - Estruturas de controle (if/else, loops)
+   - Funções (def, lambda)
+   - Listas, dicionários, tuplas e conjuntos
+
+2. **Programação Orientada a Objetos (POO)**
+   - Classes e objetos
+   - Herança e polimorfismo
+   - Métodos especiais (__init__, __str__, etc.)
+
+3. **Manipulação de Dados**
+   - Bibliotecas como Pandas e NumPy
+   - Leitura e escrita de arquivos (CSV, JSON, XML)
+   - Expressões regulares (regex)
+
+4. **Frameworks Web**
+   - Django
+   - Flask
+   - FastAPI
+
+5. **Automação e Scripting**
+   - Automação de tarefas com scripts
+   - Web scraping (BeautifulSoup, Scrapy)
+   - Automação de navegadores (Selenium)
+
+6. **Análise de Dados e Machine Learning**
+   - Bibliotecas como Scikit-learn, TensorFlow, PyTorch
+   - Visualização de dados (Matplotlib, Seaborn, Plotly)
+
+7. **Testes**
+   - Unittest
+   - Pytest
+   - Doctest
+
+8. **Ambientes Virtuais e Gerenciamento de Pacotes**
+   - Virtualenv e venv
+   - Pip e Pipenv
+   - Poetry
+
+---
+
+### Node.js
+1. **Fundamentos do Node.js**
+   - Introdução ao Node.js e ao ecossistema
+   - Módulos do Node.js (fs, path, http, etc.)
+   - NPM (Node Package Manager)
+
+2. **Desenvolvimento de APIs**
+   - Criação de APIs RESTful
+   - Uso do Express.js
+   - Autenticação e autorização (JWT, OAuth)
+
+3. **Banco de Dados**
+   - Conexão com bancos de dados (MongoDB, MySQL, PostgreSQL)
+   - ORMs e ODMs (Sequelize, Mongoose)
+   - Consultas e operações CRUD
+
+4. **Gerenciamento de Dependências**
+   - Uso de pacotes NPM
+   - Versionamento de pacotes
+   - Scripts NPM
+
+5. **Desempenho e Escalabilidade**
+   - Clusterização
+   - Load balancing
+   - Uso de cache (Redis)
+
+6. **Testes**
+   - Mocha e Chai
+   - Jest
+   - Supertest (testes de APIs)
+
+7. **Segurança**
+   - Prevenção de ataques comuns (SQL injection, XSS)
+   - Uso de HTTPS
+   - Validação de entrada de dados
+
+8. **Ferramentas de Desenvolvimento**
+   - Debugging com Node.js
+   - Uso do Nodemon para desenvolvimento
+   - Logging (Winston, Morgan)
+
+---
+
+### Tópicos Intermediários/Avançados (Aplicáveis a Todas as Linguagens)
+1. **Desenvolvimento Assíncrono**
+   - Callbacks, Promises, Async/Await
+   - Event Loop e Concorrência
+
+2. **Padrões de Projeto**
+   - Singleton, Factory, Observer, etc.
+   - MVC (Model-View-Controller)
+
+3. **Integração Contínua e Entrega Contínua (CI/CD)**
+   - Uso de ferramentas como GitHub Actions, Jenkins, Travis CI
+
+4. **Contêinerização e Orquestração**
+   - Docker
+   - Kubernetes
+
+5. **Cloud Computing**
+   - Serviços AWS, Google Cloud, Azure
+   - Serverless (AWS Lambda, Google Cloud Functions)
+
+6. **Boas Práticas de Desenvolvimento**
+   - Clean Code
+   - SOLID principles
+   - Versionamento com Git
+
+7. **Segurança Avançada**
+   - Criptografia
+   - Gerenciamento de tokens e sessões
+   - Prevenção de vulnerabilidades comuns
+
+Essa lista cobre uma ampla gama de tópicos que podem ser explorados dependendo do seu nível de experiência e dos seus objetivos de carreira. Boa sorte nos estudos! 🚀

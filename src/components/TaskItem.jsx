@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import {
  FaTrash,
- 
+
  FaPaperclip,
  FaSave,
  FaChevronDown,
  FaChevronRight,
 
 } from "react-icons/fa";
-import { VscCombine , VscCheck ,VscNote, VscAdd} from "react-icons/vsc";
+import { VscCombine, VscCheck, VscNote, VscAdd } from "react-icons/vsc";
 
 import { LuPencilLine } from "react-icons/lu";
 
@@ -29,8 +29,6 @@ const buttonStyle = {
  justifyContent: "center",
  transition: "background-color 0.3s, opacity 0.3s",
 };
-
-
 
 const textInputStyle = {
  flex: 1,
@@ -58,27 +56,38 @@ const progressStyle = (percentage) => ({
 });
 
 
-const TaskItem = ({ task, taskIndex, setTasks, deleteTask }) => {
+
+
+
+
+const TaskItem = ({ task ={} , taskIndex, setTasks, deleteTask }) => {
+ 
+   if (!task) {
+    <p>Task não encontrada</p>;
+    return null
+    
+  }
+ 
  const [subtaskName, setSubtaskName] = useState("");
 
  const [showDetails, setShowDetails] = useState(false);
 
  const addSubtask = () => {
   if (subtaskName.trim()) {
-    setTasks((prevTasks) => {
-      const updatedTasks = [...prevTasks];
-      updatedTasks[taskIndex].subtasks.push({
-        name: subtaskName,
-        completed: false,
-        note: "",
-        isEditingNote: false,
-        isNoteVisible: true, // Adiciona o estado de visibilidade da nota
-      });
-      return updatedTasks;
+   setTasks((prevTasks) => {
+    const updatedTasks = [...prevTasks];
+    updatedTasks[taskIndex].subtasks.push({
+     name: subtaskName,
+     completed: false,
+     note: "",
+     isEditingNote: false,
+     isNoteVisible: true, // Adiciona o estado de visibilidade da nota
     });
-    setSubtaskName("");
+    return updatedTasks;
+   });
+   setSubtaskName("");
   }
-};
+ };
 
  const toggleSubtaskCompletion = (subtaskIndex) => {
   setTasks((prevTasks) => {
@@ -104,17 +113,30 @@ const TaskItem = ({ task, taskIndex, setTasks, deleteTask }) => {
  };
 
 
+const [message, setMessage] = useState({ text: "", type: "" }); // Estado para a mensagem
+
+  // Função para exibir mensagens
+  const showMessage = (text, type) => {
+    setMessage({ text, type });
+    setTimeout(() => setMessage({ text: "", type: "" }), 3000); // Limpa a mensagem após 3 segundos
+  };
 
 
-
- const saveNote = (subtaskIndex, noteText) => {
-  setTasks((prevTasks) => {
-   const updatedTasks = [...prevTasks];
-   updatedTasks[taskIndex].subtasks[subtaskIndex].note = noteText;
-   updatedTasks[taskIndex].subtasks[subtaskIndex].isEditingNote = false;
-   return updatedTasks;
-  });
- };
+// Função para salvar a nota
+  const saveNote = (subtaskIndex, noteText) => {
+    if (noteText.trim()) {
+      setTasks((prevTasks) => {
+        const updatedTasks = [...prevTasks];
+        updatedTasks[taskIndex].subtasks[subtaskIndex].note = noteText;
+        updatedTasks[taskIndex].subtasks[subtaskIndex].isEditingNote = false;
+        return updatedTasks;
+      });
+      showMessage("Nota salva com sucesso!", "success"); // Mensagem de sucesso
+    } else {
+      showMessage("A nota não pode estar vazia.", "error"); // Mensagem de erro
+    }
+  };
+ 
 
  const handleClipClick = (subtaskIndex) => {
   setTasks((prevTasks) => {
@@ -124,19 +146,19 @@ const TaskItem = ({ task, taskIndex, setTasks, deleteTask }) => {
    return updatedTasks;
   });
  };
- 
- 
+
+
  const [isNoteVisible, setIsNoteVisible] = useState(true);
- 
+
  const hiddenNote = (subtaskIndex) => {
   setTasks((prevTasks) => {
-    const updatedTasks = [...prevTasks];
-    const subtask = updatedTasks[taskIndex].subtasks[subtaskIndex];
-    subtask.isNoteVisible = !subtask.isNoteVisible; // Alterna a visibilidade da nota
-    return updatedTasks;
+   const updatedTasks = [...prevTasks];
+   const subtask = updatedTasks[taskIndex].subtasks[subtaskIndex];
+   subtask.isNoteVisible = !subtask.isNoteVisible; // Alterna a visibilidade da nota
+   return updatedTasks;
   });
-};
- 
+ };
+
 
  const hasNotes = task.subtasks.some((subtask) => subtask.note && subtask.note.trim() !== "");
 
@@ -154,23 +176,25 @@ const TaskItem = ({ task, taskIndex, setTasks, deleteTask }) => {
  const [text, setText] = useState(""); // Estado para armazenar o conteúdo do textarea
  const [checkboxes, setCheckboxes] = useState([]); // Estado para armazenar os checkboxes gerados
 
- // Função para capturar os elementos DENTRO DO textarea e criar os checkboxes EM NOTES
- const generateCheckboxes = (noteIndex) => {
-  const regex = /#\s*(.+?)\./g;
-  const subtaskNote = task.subtasks[noteIndex].note; // Corrigido para acessar a nota correta
-  const matches = [...subtaskNote.matchAll(regex)].map(match => match[1]);
+ 
+   // Função para gerar checkboxes
+  const generateCheckboxes = (noteIndex) => {
+    const regex = /#\s*(.+?)\./g;
+    const subtaskNote = task.subtasks[noteIndex].note;
+    const matches = [...subtaskNote.matchAll(regex)].map((match) => match[1]);
 
-  if (matches.length === 0) {
-   alert("Nenhum texto no formato n/ '# TEXTO.' foi encontrado.");
-   return;
-  }
+    if (matches.length === 0) {
+      showMessage("Nenhum texto no formato '# TEXTO.' foi encontrado.", "error"); // Mensagem de erro
+      return;
+    }
 
-  setTasks((prevTasks) => {
-   const updatedTasks = [...prevTasks];
-   updatedTasks[taskIndex].subtasks[noteIndex].checkboxes = matches;
-   return updatedTasks;
-  });
- };
+    setTasks((prevTasks) => {
+      const updatedTasks = [...prevTasks];
+      updatedTasks[taskIndex].subtasks[noteIndex].checkboxes = matches;
+      return updatedTasks;
+    });
+    showMessage("Checkboxes convertidos com sucesso!", "success"); // Mensagem de sucesso
+  };
 
  return (
 
@@ -271,13 +295,13 @@ const TaskItem = ({ task, taskIndex, setTasks, deleteTask }) => {
        onKeyDown={(e) => {
         if (e.key === "Enter") setSubtaskName(e.target.value);
        }}
-       placeholder="Add a new subtask"
+       placeholder="Add subtask"
        style={{
         ...textInputStyle,
         marginLeft: "20px",
-        borderRadius: "3px",
+        
         color: "gray",
-        border: "1px solid #15ec76d5"
+        borderBottom: "1px solid #15ec76d5"
        }
 
 
@@ -354,8 +378,8 @@ const TaskItem = ({ task, taskIndex, setTasks, deleteTask }) => {
           marginLeft: "5px"
 
          }}>
-         
-         {/* edita anotaçoes */}
+
+          {/* edita anotaçoes */}
           <button
            onClick={() => handleClipClick(index)}
            style={buttonStyle}
@@ -363,18 +387,18 @@ const TaskItem = ({ task, taskIndex, setTasks, deleteTask }) => {
           >
            <LuPencilLine />
           </button>
-       
-         {/*oculta  anotaçoes*/}
-         <button
-  onClick={() => hiddenNote(index)} // Passa o índice da subtarefa
-  style={{
-    ...buttonStyle,
-    color: subtask.isNoteVisible ? "#fff" : "#f2ae1fd5", // Muda a cor do ícone
-  }}
-  aria-label="Oculta NOTE"
->
-  {subtask.isNoteVisible ? <MdMoveDown /> : <MdMoveUp />}
-</button>
+
+          {/*oculta  anotaçoes*/}
+          <button
+           onClick={() => hiddenNote(index)} // Passa o índice da subtarefa
+           style={{
+            ...buttonStyle,
+            color: subtask.isNoteVisible ? "#fff" : "#f2ae1fd5", // Muda a cor do ícone
+           }}
+           aria-label="Oculta NOTE"
+          >
+           {subtask.isNoteVisible ? <MdMoveDown /> : <MdMoveUp />}
+          </button>
           <button
            onClick={() => deleteSubtask(index)}
            style={buttonStyle}
@@ -432,6 +456,31 @@ const TaskItem = ({ task, taskIndex, setTasks, deleteTask }) => {
             e.target.style.boxShadow = "0 4px 8px rgba(0, 0, 0, 0.1)";
            }}
           />
+          
+          <div 
+          style={{
+            display: "flex",
+           alignItems: "center",
+           flex: 1,
+           padding: 0
+           
+          }}
+          >
+          
+           {/* Span para exibir a mensagem */}
+                <span
+                  style={{
+                    marginLeft: "10px",
+                    color: message.type === "success" ? "#4CAF50" : "#FF5733",
+                    fontSize: "10px",
+                    fontWeight: "bold",
+                    zIndex: "10",
+                    position:"absolute",
+                    border: "1px solid gold",
+                  }}
+                >
+                  {message.text}
+                </span>
           <button
            onClick={() => saveNote(index, subtask.note)}
            style={{
@@ -452,60 +501,66 @@ const TaskItem = ({ task, taskIndex, setTasks, deleteTask }) => {
 
            }}
           >
-          <VscCombine />
+           <VscCombine />
           </button>
+          
+          
+          
+          </div>
+          
+          
          </div>
         )}
-     {subtask.note && !subtask.isEditingNote && (
-     <div
-       style={{
-         margin: "5px",
-         textOverflow: "ellipsis",
-         fontSize: "12px",
-         color: "#f2ae1fd5",
-         border: "1px solid gray",
-         padding: "5px",
-         overflow: 'hidden',
-         
-         whiteSpace: "pre-wrap",
-         height: subtask.isNoteVisible ? "100%" : "10px", 
-         transition: "height 0.3s", // Adiciona uma transição suave
-       }}
-     >
-       <strong
-         style={{
+        {subtask.note && !subtask.isEditingNote && (
+         <div
+          style={{
+           margin: "5px",
+           textOverflow: "ellipsis",
            fontSize: "12px",
-           color: "#989898d5",
-           fontWeight: "bold",
-           fontStyle: "italic",
-           marginLeft: "5px",
-           textDecoration: "underline",
-         }}
-       >
-         Note:
-       </strong> {subtask.note}
+           color: "#f2ae1fd5",
+           borderTop: "1px solid gray",
+           padding: "5px",
+           overflow: 'hidden',
 
-       {/* Renderização dos Checkboxes */}
-       {subtask.checkboxes && subtask.checkboxes.map((checkbox, idx) => (
-         <div key={idx}
+           whiteSpace: "pre-wrap",
+           height: subtask.isNoteVisible ? "100%" : "10px",
+           transition: "height 0.3s", // Adiciona uma transição suave
+          }}
+         >
+          <strong
            style={{
+            fontSize: "12px",
+            color: "#989898d5",
+            fontWeight: "bold",
+            fontStyle: "italic",
+            marginLeft: "5px",
+            textDecoration: "underline",
+           }}
+          >
+           Note:
+          </strong> {subtask.note}
+
+          {/* Renderização dos Checkboxes */}
+          {subtask.checkboxes && subtask.checkboxes.map((checkbox, idx) => (
+           <div key={idx}
+            style={{
              marginLeft: "10px",
              marginTop: "1px",
              display: "flex",
              alignItems: "center",
-           }}>
-           <input
+            }}>
+            <input
              type="checkbox"
              id={`checkbox-${idx}`}
              style={{ marginRight: "3px", borderBottom: '1px solid gray', }}
-           />
-           <label htmlFor={`checkbox-${idx}`} style={{ color: "#fff", }}>
+            />
+            <label htmlFor={`checkbox-${idx}`} style={{ color: "#fff", }}>
              {checkbox}
-           </label>
+            </label>
+           </div>
+          ))}
          </div>
-       ))}
-     </div>
-   )}
+        )}
        </li>
       ))}
      </ul>

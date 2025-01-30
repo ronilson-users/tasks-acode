@@ -5,83 +5,87 @@ import ErrorBoundary from "./ErrorBoundary"; // Import the error boundary
 
 import App from "./App";
 
-import { modalStyles } from "./style.js";  // Importando os estilos
+import { taskStyles } from "./style.js";  // Importando os estilos
+
 
 class AcodePlugin {
-  async init(baseUrl, cacheFile, cacheFileUrl) {
-    // Crie um container para o modal
-    let modalOverlay = document.createElement("div");
-    modalOverlay.id = "modal-overlay";
-    modalOverlay.style.cssText = modalStyles.overlay; // Aplicando estilo
+ async init(baseUrl, cacheFile, cacheFileUrl) {
 
-    let modalContainer = document.createElement("div");
-    modalContainer.id = "modal-container";
-    modalContainer.style.cssText = modalStyles.container; // Aplicando estilo
+  // Crie um container para o Container
+  const taskOverlay = document.createElement("div");
+  taskOverlay.id = "task-overlay";
+  taskOverlay.style.cssText = taskStyles.overlay; // Aplicando estilo
 
-    // Crie um botão para fechar o modal
-    let closeButton = document.createElement("button");
-    closeButton.textContent = "Fechar";
-    closeButton.style.cssText = modalStyles.closeButton; // Adicione estilos
-    closeButton.addEventListener("click", () => this.hideModal());
-    
-    // Adicione o botão ao modalContainer
-    modalContainer.append(closeButton);
 
-    modalOverlay.append(modalContainer);
-    document.body.append(modalOverlay);
+  const taskContainer = document.createElement("div");
+  taskContainer.id = "task-container";
+  taskContainer.style.cssText = taskStyles.container; // Aplicando estilo
 
-    // Crie um React root e renderize o app no modal
-    const root = ReactDOM.createRoot(modalContainer);
+  // Adicione os elementos ao Container
 
-    root.render(
-      <ErrorBoundary>
-        <App baseUrl={this.baseUrl} cacheFile={cacheFile} cacheFileUrl={cacheFileUrl} />
-      </ErrorBoundary>
-    );
+  taskOverlay.append(taskContainer);
+  document.body.append(taskOverlay);
 
-    this.modalOverlay = modalOverlay;
+  // Crie um React root e renderize o app no Container
+  const root = ReactDOM.createRoot(taskContainer);
 
-    // Adiciona o comando para abrir o modal
-    editorManager.editor.commands.addCommand({
-      name: "react-acode",
-      description: "Task Manager",
-      bindKey: {
-        win: "Ctrl-Shift-R",
-      },
-      exec: () => this.showModal(),
-    });
+  root.render(
+   <ErrorBoundary>
+    <App baseUrl={this.baseUrl} cacheFile={cacheFile} cacheFileUrl={cacheFileUrl} />
+   </ErrorBoundary>
+  );
 
-    modalOverlay.addEventListener("click", (e) => {
-      if (e.target === modalOverlay) {
-        this.hideModal();
-      }
-    });
+  this.taskOverlay = taskOverlay;
+
+  // Adiciona o comando para abrir o Container
+  editorManager.editor.commands.addCommand({
+   name: "react-acode",
+   description: "Task Manager",
+   bindKey: {
+    win: "Ctrl-Shift-R",
+   },
+   exec: () => this.showContainer(),
+  });
+
+  taskOverlay.addEventListener("click", (e) => {
+   if (e.target === taskOverlay) {
+    this.hideContainer();
+   }
+  });
+ }
+
+ // Função para mostrar o Container
+ showContainer() {
+  if (this.taskOverlay) {
+   this.taskOverlay.style.visibility = "visible";
+   this.taskOverlay.style.opacity = "1";
+   const taskContainer = document.getElementById("task-container");
+   taskContainer.style.transform = "translateY(0)";
   }
+ }
 
-  // Função para mostrar o modal
-  showModal() {
-    if (this.modalOverlay) {
-      this.modalOverlay.style.visibility = "visible";
-    }
+ // Função para esconder o Container
+ hideContainer() {
+  if (this.taskOverlay) {
+   const taskContainer = document.getElementById("task-container");
+   taskContainer.style.transform = "translateY(-100%)";
+   setTimeout(() => {
+    this.taskOverlay.style.visibility = "hidden";
+    this.taskOverlay.style.opacity = "0";
+   }, 300); // Atraso para permitir a animação
   }
+ }
 
-  // Função para esconder o modal
-  hideModal() {
-    if (this.modalOverlay) {
-      this.modalOverlay.style.visibility = "hidden";
-    }
+ async destroy() {
+  // Desmonte o React app e remova o Container
+  if (this.taskOverlay) {
+   const taskContainer = document.getElementById("task-container");
+   if (taskContainer) {
+    ReactDOM.createRoot(taskContainer).unmount();
+   }
+   this.taskOverlay.remove();
   }
-
-  async destroy() {
-    // Desmonte o React app e remova o modal
-    if (this.modalOverlay) {
-      const modalContainer = document.getElementById("modal-container");
-      if (modalContainer) {
-        ReactDOM.createRoot(modalContainer).unmount();
-      }
-      this.modalOverlay.remove();
-    }
-  }
+ }
 }
 
 if (window.acode) {
